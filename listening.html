@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リスニング ショートカット</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+
+        .container {
+            width: 60%;
+            min-width: 600px;
+            max-width: 800px;
+            margin: auto;
+            padding-top: 30px;
+        }
+
+        p {
+            width: fit-content;
+            margin-bottom: 3px;
+        }
+
+        input {
+            width: 3em;
+        }
+
+        .launcher > button {
+            color: white;
+            padding: 2px 4px;
+            border-radius: 5%;
+            background-color: #0d6efd;
+            border: none;
+        }
+
+        .launcher {
+            padding-left: 50px;
+        }
+
+        .launcher > button:hover {
+            background-color: #5599ff;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <p class="grade-form-wrapper">
+                <label for="gradeform">学年: </label>
+                <select name="gradeform" id="gradeform">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </p>
+            <p class="month-form-wrapper">
+                <label for="monthform">月: </label>
+                <input type="number" name="monthform" id="monthform">
+            </p>
+            <p class="launcher">
+                <button onclick="launchUrl();">開く</button>
+            </p>
+        </div>
+        <script type="text/javascript">
+            const gradeForm = document.querySelector('#gradeform');
+            const monthForm = document.querySelector('#monthform');
+            setTimeout(() => {
+                const currentDate = new Date();
+                const currentMonth = String(currentDate.getMonth()+1);
+                monthForm.value = currentMonth;
+            }, 100);
+            
+            const renderUrl = (g, m) => {
+                g = String(g);
+                m = String(m);
+                if (m.length === 1) {
+                    m = `0${m}`;
+                }
+                return `https://www.kyo-kai.co.jp/cs/T23/${g}G${m}.html`;
+            }
+
+            const launchUrl = () => {
+                const g = gradeForm.value;
+                const m = monthForm.value;
+                const url = renderUrl(g, m);
+                location.href = url;
+            }
+        </script>
+    </main>
+</body>
+</html>
