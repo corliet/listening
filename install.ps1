@@ -6,3 +6,5 @@ function install {
     $shortcut.TargetPath = $targetPath
     $shortcut.Save()
 }
+
+install
